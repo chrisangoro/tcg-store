@@ -1,16 +1,26 @@
-import { type NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
-
-import { api } from "~/utils/api";
+import { useQuery } from "@tanstack/react-query";
+import { getCard } from "~/utils/ygoapi";
 
 const inter = Inter({
     subsets: ["latin"],
     variable: "--font-inter",
 });
 
-const Home: NextPage = () => {
-    const hello = api.example.hello.useQuery({ text: "from tRPC" });
+export default function CardPage() {
+    const router = useRouter();
+    const { id } = router.query;
+
+    const { data, status } = useQuery([`card-info`, Number(id)], () =>
+        getCard(Number(Number(id)))
+    );
+
+    // const { data, status } = useQuery({
+    //     queryKey: [`card-${id}`, Number(id)],
+    //     queryFn: getCard,
+    // });
 
     return (
         <>
@@ -41,11 +51,18 @@ const Home: NextPage = () => {
                 </div>
                 {/* content */}
                 <div className="mx-auto max-w-7xl p-6">
-                    {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+                    {status === "loading" && <div>Loading...</div>}
+                    {status === "error" && <div>Error</div>}
+                    {status === "success" && (
+                        <div>
+                            <pre>
+                                <code>{JSON.stringify(data, null, 2)}</code>
+                            </pre>
+                        </div>
+                    )}
+                    {id}
                 </div>
             </main>
         </>
     );
-};
-
-export default Home;
+}

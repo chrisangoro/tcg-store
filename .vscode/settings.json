@@ -1,0 +1,6 @@
+{
+  "notebook.formatOnSave.enabled": true,
+  "editor.formatOnSave": true,
+  "twig-language-2.tabSize": 4,
+  "editor.indentSize": "tabSize"
+}
