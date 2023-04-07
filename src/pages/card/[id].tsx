@@ -44,23 +44,39 @@ export default function CardPage() {
                     {status === "loading" && <div>Loading...</div>}
                     {status === "error" && <div>Error</div>}
                     {status === "success" && (
-                        <div className="grid grid-cols-[250px_auto] gap-4">
-                            <div>
-                                <img
-                                    src={data.data[0].card_images[0].image_url}
-                                    alt="Card"
-                                />
-                            </div>
-                            <div>
-                                <h2 className="mb-2 text-4xl">
-                                    {data.data[0].name}
-                                </h2>
-                                <h4 className="mb-2 text-sm">
-                                    {data.data[0].type}
-                                </h4>
-                                <p className="text-lg">{data.data[0].desc}</p>
-                                {/* "race": "Fiend",
-                                    "attribute": "DARK", */}
+                        <div className="flex justify-center">
+                            <div className="grid grid-rows-2 gap-4 md:max-w-5xl md:grid-cols-[25%_auto] md:grid-rows-none">
+                                <div className="rounded-md bg-neutral-800 p-4">
+                                    <img
+                                        src={
+                                            data.data[0].card_images[0]
+                                                .image_url
+                                        }
+                                        alt="Card"
+                                    />
+                                </div>
+                                <div className="rounded-md bg-neutral-800 p-4">
+                                    <h2 className="mb-2 text-3xl">
+                                        {`${data.data[0].card_sets[0].set_code}: ${data.data[0].name}`}
+                                    </h2>
+                                    <div className="flex justify-between">
+                                        <h4 className="mb-2 text-sm">
+                                            {data.data[0].type}
+                                        </h4>
+                                        <h4 className="mb-2 text-sm">
+                                            {
+                                                data.data[0].card_sets[0]
+                                                    .set_rarity
+                                            }
+                                        </h4>
+                                    </div>
+                                    <p className="mb-4 text-lg">
+                                        {data.data[0].desc}
+                                    </p>
+                                    <span className="text-right font-mono text-sm">
+                                        ${data.data[0].card_sets[0].set_price}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     )}

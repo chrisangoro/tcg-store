@@ -35,16 +35,20 @@ const CardList: NextPage = () => {
                     </Link>
                 </div>
                 {/* content */}
-                <div className="mx-auto max-w-7xl p-6">
+                <div className="mx-auto flex max-w-5xl flex-wrap gap-[3.3%] p-6">
                     {data &&
                         data.map((card) => {
                             return (
                                 <Link
                                     href={`/card/${card.card_id}`}
                                     key={card.id}
+                                    className="mb-[3.3%] w-full md:w-[30%]"
                                 >
-                                    <div className="mb-4 grid w-full grid-cols-[250px_auto] gap-6 rounded-md bg-neutral-800 px-4 py-4 hover:bg-neutral-600">
-                                        <div>
+                                    <div className="mb-4 flex h-full flex-col rounded-md bg-neutral-800 px-4 py-4 hover:bg-neutral-600">
+                                        <span className="mb-2 font-mono text-sm text-neutral-400">
+                                            {card.rarity}
+                                        </span>
+                                        <div className="mb-2">
                                             {card.image_url && (
                                                 <img
                                                     src={card.image_url}
@@ -52,17 +56,14 @@ const CardList: NextPage = () => {
                                                 />
                                             )}
                                         </div>
-                                        <div>
-                                            <h2 className="text-4xl">
-                                                {card.name}
-                                            </h2>
-                                            <h4 className="text-2xl">
+                                        <h2 className="mb-2 text-2xl">
+                                            {card.name}
+                                        </h2>
+                                        <div className="flex justify-between">
+                                            <h4 className="text-sm">
                                                 {card.set_code}
                                             </h4>
-                                            <span className="block">
-                                                {card.rarity}
-                                            </span>
-                                            <span className="block font-mono">
+                                            <span className="font-mono text-sm">
                                                 ${card.set_price}
                                             </span>
                                         </div>
