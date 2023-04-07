@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 import { api } from "~/utils/api";
 
@@ -21,9 +22,18 @@ const Home: NextPage = () => {
             </Head>
             <main className={`${inter.variable}`}>
                 {/* header */}
-                <div className="flex w-full bg-neutral-200 px-4 py-10"></div>
+                <div className="flex w-full bg-neutral-200 px-4 py-8">
+                    <h1 className="text-xl text-rose-950">TCG STORE TEST</h1>
+                </div>
                 {/* menu */}
-                <div className="flex w-full bg-neutral-950 px-4 py-6"></div>
+                <div className="flex w-full bg-neutral-950 px-4 py-6">
+                    <Link
+                        href={`/cards`}
+                        className="font-mono text-neutral-500"
+                    >
+                        Cards
+                    </Link>
+                </div>
                 {/* image / slider? */}
                 <div className="w-full bg-rose-950 px-8 py-16">
                     <h4 className="mb-2 text-2xl font-bold text-[#EAD3C1]">
