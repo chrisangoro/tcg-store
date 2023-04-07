@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import { getCard } from "~/utils/ygoapi";
 import Link from "next/link";
-import Image from "next/image";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -18,8 +17,6 @@ export default function CardPage() {
     const { data, status } = useQuery([`card-info`, Number(id)], () =>
         getCard(Number(Number(id)))
     );
-
-    console.log(data);
 
     return (
         <>
@@ -42,55 +39,31 @@ export default function CardPage() {
                         Cards
                     </Link>
                 </div>
-                {/* image / slider? */}
                 {/* content */}
                 <div className="mx-auto max-w-7xl p-6">
                     {status === "loading" && <div>Loading...</div>}
                     {status === "error" && <div>Error</div>}
                     {status === "success" && (
-                        <>
-                            <div className="grid grid-cols-[250px_auto] gap-4">
-                                <div>
-                                    <Image
-                                        src={
-                                            // @ts-expect-error non typed api
-                                            data.data[0].card_images[0]
-                                                .image_url
-                                        }
-                                        alt="Card"
-                                    />
-                                </div>
-                                <div>
-                                    <h2 className="mb-2 text-4xl">
-                                        {
-                                            // @ts-expect-error non typed api
-                                            data.data[0].name
-                                        }
-                                    </h2>
-                                    <h4 className="mb-2 text-sm">
-                                        {
-                                            // @ts-expect-error non typed api
-                                            data.data[0].type
-                                        }
-                                    </h4>
-                                    <p className="text-lg">
-                                        {
-                                            // @ts-expect-error non typed api
-                                            data.data[0].desc
-                                        }
-                                    </p>
-                                    {/* "race": "Fiend",
-                                        "attribute": "DARK", */}
-                                </div>
+                        <div className="grid grid-cols-[250px_auto] gap-4">
+                            <div>
+                                <img
+                                    src={data.data[0].card_images[0].image_url}
+                                    alt="Card"
+                                />
                             </div>
-                            {/* <div>
-                                <pre>
-                                    <code>{JSON.stringify(data, null, 2)}</code>
-                                </pre>
-                            </div> */}
-                        </>
+                            <div>
+                                <h2 className="mb-2 text-4xl">
+                                    {data.data[0].name}
+                                </h2>
+                                <h4 className="mb-2 text-sm">
+                                    {data.data[0].type}
+                                </h4>
+                                <p className="text-lg">{data.data[0].desc}</p>
+                                {/* "race": "Fiend",
+                                    "attribute": "DARK", */}
+                            </div>
+                        </div>
                     )}
-                    {/* {id} */}
                 </div>
             </main>
         </>
