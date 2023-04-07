@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import { getCard } from "~/utils/ygoapi";
 import Link from "next/link";
+import Image from "next/image";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -50,22 +51,33 @@ export default function CardPage() {
                         <>
                             <div className="grid grid-cols-[250px_auto] gap-4">
                                 <div>
-                                    <img
+                                    <Image
                                         src={
+                                            // @ts-expect-error non typed api
                                             data.data[0].card_images[0]
                                                 .image_url
                                         }
+                                        alt="Card"
                                     />
                                 </div>
                                 <div>
                                     <h2 className="mb-2 text-4xl">
-                                        {data.data[0].name}
+                                        {
+                                            // @ts-expect-error non typed api
+                                            data.data[0].name
+                                        }
                                     </h2>
                                     <h4 className="mb-2 text-sm">
-                                        {data.data[0].type}
+                                        {
+                                            // @ts-expect-error non typed api
+                                            data.data[0].type
+                                        }
                                     </h4>
                                     <p className="text-lg">
-                                        {data.data[0].desc}
+                                        {
+                                            // @ts-expect-error non typed api
+                                            data.data[0].desc
+                                        }
                                     </p>
                                     {/* "race": "Fiend",
                                         "attribute": "DARK", */}
